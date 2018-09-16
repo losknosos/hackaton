@@ -101,7 +101,7 @@ SaleViewer.TopMenu = function (container, selected, dashboardHeader) {
                 var link = e.itemData.link;
                 if (link) {
                     window.location = SaleViewer.baseApiUrl + link;
-                    window.location = "https://novaintegra.mybluemix.net" + link;                    
+                    window.location = "https://novaintegra.mybluemix.net"  + link;                    
                 }
             }
         });
