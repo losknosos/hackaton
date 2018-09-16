@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    @*<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>@ViewData["Title"]</title>*@
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>@ViewBag.Title / Scotiabank - Colpatria [NovaIntegra]</title>
+
+    <environment names="Development">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+
+    <script type="text/javascript" src="js/scripts/topmenu.js"></script>
+
+
+    @*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">*@
+</head>
+
+<body id="salesviewer">
+    @*<section id="contents">
+            @RenderBody()
+        </section>*@
+
+        <environment names="Development">
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment names="Staging,Production">
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>*@
+
+    <div class="page-content-wrapper">
+        <div class="page-content-push"></div>
+        <div id="header">
+            <div class="content">
+                <a class="logo indent" href="~/"></a>
+
+                <div class="menu">
+                    <div id="menu"></div>
+
+                    <div id="openPopupButton">
+                        <a><span class="info-link">?</span></a>
+                    </div>
+
+                </div>
+                <script>
+                    var activePageId = "@ViewBag.PageId" || "@ViewBag.Title",
+                    topMenu = new SaleViewer.TopMenu($("#menu"), activePageId, "@ViewBag.Header");
+                    topMenu.init();
+                </script>
+            </div>
+
+        </div>
+
+        @RenderBody()
+
+    </div>
+    <div id="footer">
+        <div class="wrapper">
+            <div class="content">
+                <div class="text indent">
+                    <h2>La clave del cambio digital! </h2>
+                    <p>Jorge Ernesto Fernandez Hau</p>
+                </div>
+                @*<a class="dx-logo" href="https://www.devexpress.com/"></a>*@
+            </div>
+        </div>
+    </div>
+    @*<div id="popup">
+            <div class="popup-content">
+                <div class="popup-title"></div>
+                <div class="popup-text">
+                    @RenderSection("descriptionTextForPopup")
+                </div>
+            </div>
+            <div class="dx-clearfix">
+                <div id="closePopupButton">OK</div>
+                <div id="downloadPopupButton">Download Free Trial</div>
+            </div>
+        </div>*@
+
+
+
+    <script src="~/js/lib/jquery.i18n/jquery.i18n.js"></script>
+    <script src="~/js/lib/jquery.i18n/jquery.i18n.messagestore.js"></script>
+    <script src="~/js/lib/jquery.i18n/jquery.i18n.fallbacks.js"></script>
+    <script src="~/js/lib/jquery.i18n/jquery.i18n.language.js"></script>
+    <script src="~/js/lib/jquery.i18n/jquery.i18n.parser.js"></script>
+    <script src="~/js/lib/jquery.i18n/jquery.i18n.emitter.js"></script>
+    <script src="~/js/lib/jquery.i18n/jquery.i18n.emitter.bidi.js"></script>
+
+    @*<script type="text/javascript" src="js/dx.all.js"></script>*@
+
+    <script type="text/javascript" src="js/cldr.min.js"></script>
+    <script type="text/javascript" src="js/cldr/event.min.js"></script>
+    <script type="text/javascript" src="js/cldr/supplemental.min.js"></script>
+    <script type="text/javascript" src="js/globalize.min.js"></script>
+    <script type="text/javascript" src="js/globalize/message.min.js"></script>
+    <script type="text/javascript" src="js/globalize/number.min.js"></script>
+    <script type="text/javascript" src="js/globalize/currency.min.js"></script>
+    <script type="text/javascript" src="js/globalize/date.min.js"></script>
+    <script type="text/javascript" src="js/dx.viz-web.js"></script>
+    <script type="text/javascript" src="js/vectormap-data/world.js"></script>
+    <script type="text/javascript" src="js/vectormap-data/africa.js"></script>
+    <script type="text/javascript" src="js/vectormap-data/canada.js"></script>
+    <script type="text/javascript" src="js/vectormap-data/eurasia.js"></script>
+    <script type="text/javascript" src="js/vectormap-data/europe.js"></script>
+    <script type="text/javascript" src="js/vectormap-data/usa.js"></script>
+
+    <script type="text/javascript" src="js/scripts/date.js"></script>
+    <script type="text/javascript" src="js/scripts/switcher.js"></script>
+    <script type="text/javascript" src="js/scripts/sharedWidgets.js"></script>
+    <script type="text/javascript" src="js/scripts/dashboard.js"></script>
+
+    <script type="text/javascript" src="js/scripts/legend.js"></script>
+    <script type="text/javascript" src="js/scripts/index.js"></script>
+
+
+    <!-- DevExtreme themes -->
+    <link rel="stylesheet" type="text/css" href="/css/dx.common.css" />
+    <link rel="stylesheet" type="text/css" href="/css/dx.light.css" />
+
+    @RenderSection("scripts", required: false)
+    @*<footer class="footer">
+            <div class="container">
+                <span><a href="https://console.bluemix.net/docs/tutorials/index.html" target="_blank">Looking for more tutorials?</a></span>
+            </div>
+        </footer>*@
+</body>
+</html>

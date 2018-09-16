@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+<div class="page customers">
+    <div class="layout-box">
+        <div class="content">
+            <h3 class="indent">@(ViewBag.Title.ToUpper())</h3>
+            <div class="hb-a">
+                <div id="grid"></div>
+                <div id="dataGrid"></div>
+            </div>
+            <div class="hb-4">
+                <div class="lb-1">
+                    <div id="productsMap" class="indent"></div>
+                </div>
+                <div class="lb-2">
+                    <div id="productsChart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="range-content">
+            <div class="hb-2">
+                <div class="left-arrow" id="prevYear"></div>
+                <div id="rangeSelector">
+                </div>
+                <div class="right-arrow disabled" id="nextYear"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $.i18n().load({
+                en: {
+                    "welcome": "Bienvenido.",
+                    "name": "Nombre",
+                    "what_is_your_name": "Cual es su nombre?",
+                    "hello": "Hola $1",
+                    "added_to_database": "Hello $1, I've added you to the database!",
+                    "database_contents": "Database contents: "
+                },
+                ja: {
+                    "welcome": "ようこそ。",
+                    "name": "名前",
+                    "what_is_your_name": "お名前を教えてください。",
+                    "hello": "こんにちは $1",
+                    "added_to_database": "こんにちは $1 さん、あなたをデータベースに追加しました。",
+                    "database_contents": "データベースの内容: "
+                }
+            });
+            $('body').i18n();
+            $('#user_name').attr("placeholder", $.i18n('name'));
+        });
+    </script>
+    <script>
+        //Submit data when enter key is pressed
+        $('#user_name').keydown(function (e) {
+            var name = $('#user_name').val();
+            if (e.which == 13 && name.length > 0) { //catch Enter key
+                $('#nameInput').hide();
+                $('#response').html("Cargando...");
+                //POST request to API to create a new visitor entry in the database
+                $.ajax({
+                    method: "POST",
+                    url: "/api/visitors",
+                    contentType: "application/json",
+                    data: JSON.stringify({ name: name })
+                })
+                    .done(function (data) {
+                        $('#response').html($.i18n('Hola', data));
+                        getNames();
+                    });
+            }
+        });
+
+        //Retreive all the visitors from the database
+        function getNames() {
+            $.get("/api/visitors")
+                .done(function (data) {
+                    //if (data.length > 0) {
+                    //    $('#databaseNames').html($.i18n('database_contents') + JSON.stringify(data));
+                    //}
+
+                    $("#dataGrid").dxDataGrid({
+                        dataSource: {
+                            store: data
+                        },
+                        showBorders: true,                
+                        paging: {
+                            pageSize: 12
+                        },
+                        pager: {
+                            showPageSizeSelector: true,
+                            allowedPageSizes: [8, 12, 20]
+                        },
+                        columns: [
+                            "name","id"
+                        ]
+                    }).dxDataGrid("instance");
+
+                });
+
+           
+        }
+
+        //Call getNames on page load.
+        getNames();
+
+        
+
+
+    </script>
+}

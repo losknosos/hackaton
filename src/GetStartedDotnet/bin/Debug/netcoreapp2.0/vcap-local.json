@@ -1,0 +1,10 @@
+{
+    "cleardb": [
+     {
+       "credentials": {
+         "uri": "mysql://admin:TYVTTIVKBRDRVNWL@sl-us-south-1-portal.34.dblayer.com:57347/compose",
+       },
+       "name": "My ClearDB service instance name"
+     }
+    ]
+}
